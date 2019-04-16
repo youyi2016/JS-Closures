@@ -20,7 +20,7 @@ another variable called 'inner'. */
 
 //Code Here
 
-
+var inner = outer()()
 
 
 
@@ -47,8 +47,11 @@ Create a callJake function that when invoked with '435-555-9248' returns 'Callin
 in your console. */
 
   //Code Here
+function callJack() {
+  return callFriend('Jake')
+}
 
-
+console(callJack()('435-555-9248'))
 
 
 
@@ -65,13 +68,20 @@ in your console. */
 properly. */
 
 //Code Here
+function makeCounter() {
+  var i = 0;
+
+  return function() {
+    return i++;
+  }
+}
 
 //Uncomment this once you make your function
-//   var count = makeCounter();
-//   count(); // 1
-//   count(); // 2
-//   count(); // 3
-//   count(); // 4
+  var count = makeCounter();
+  // count(); // 1
+  // count(); // 2
+  // count(); // 3
+  // count(); // 4
 
 
 
@@ -99,18 +109,33 @@ http://stackoverflow.com/questions/17776940/javascript-module-pattern-with-examp
 function counterFactory(value) {
 
   // Code here.
+  var inc = (function() {
+    // Your code goes here 
+    return function() {
+      console.log(++value)
+    }
+  }());
 
+  var dec = (function() {
+    // Your code goes here 
+    return function() {
+      console.log(--value)
+    }
+  
+  }());
 
   return {
+    inc: inc,
+    dec: dec
   }
 }
 
 
 counter = counterFactory(10);
-// counter.inc() // 11
-// counter.inc() // 12
-// counter.inc() // 13
-// counter.dec() // 12
+counter.inc() // 11
+counter.inc() // 12
+counter.inc() // 13
+counter.dec() // 12
 
 
 
